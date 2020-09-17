@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    meta name="description" content=""
+    meta name="author" content=""
+    title
+      | Z-Forum
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_pack_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    = render  "layouts/nav" 
+    .container
+      - flash.each do |name, msg|
+        = content_tag :div, class: "alert alert-#{ name == :error ? "danger" : "success" } alert-dismissable", role: "alert" do
+          button.close type="button" data-dismiss="alert"
+            span aria-hidden="true"
+              | &times;
+            span.sr-only
+              | Close
+          = msg
+      = yield
+

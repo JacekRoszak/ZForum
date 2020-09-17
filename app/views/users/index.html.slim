@@ -1,0 +1,32 @@
+.page-header
+  
+  = link_to new_user_path, class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-plus
+    |  Nowy użytkownik
+  h1
+    | Lista użytkowników
+
+.table-responsive.text-center
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th.text-center
+          | E-mail
+        th.text-center
+          | Imię i nazwisko
+        th.text-center
+          | Admin
+        th
+    tbody
+      - @users.each do | user |
+        tr
+          td
+            = user.email
+          td
+            = user.name
+          td
+            = user.admin
+          td
+            = link_to 'Szczegóły', user, class: "btn btn-primary table-button"
+            = link_to 'Edytuj', edit_user_path(user) , class: "btn btn-primary table-button"
+            = link_to 'Usuń', user, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-primary table-button"

@@ -1,0 +1,22 @@
+.page-header
+  = link_to ads_path, class: 'btn btn-default' do 
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  = link_to edit_ad_path(@ad), class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-pencil
+    |  Edit 
+  h1
+    | Show ad
+dl.dl-horizontal
+  dt
+    | User:
+  dd
+    = @ad.user_id
+  dt
+    | Content:
+  dd
+    = @ad.content
+  dt
+    | End:
+  dd
+    = @ad.end

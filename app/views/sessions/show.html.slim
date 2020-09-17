@@ -1,0 +1,18 @@
+.page-header
+  = link_to sessions_path, class: 'btn btn-default' do 
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  = link_to edit_session_path(@session), class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-pencil
+    |  Edit 
+  h1
+    | Show session
+dl.dl-horizontal
+  dt
+    | Email:
+  dd
+    = @session.email
+  dt
+    | Password:
+  dd
+    = @session.password

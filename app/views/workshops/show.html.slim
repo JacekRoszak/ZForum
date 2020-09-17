@@ -1,0 +1,30 @@
+.page-header
+  = link_to workshops_path, class: 'btn btn-default' do 
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  = link_to edit_workshop_path(@workshop), class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-pencil
+    |  Edit 
+  h1
+    | Show workshop
+dl.dl-horizontal
+  dt
+    | User:
+  dd
+    = @workshop.user_id
+  dt
+    | Content:
+  dd
+    = @workshop.content
+  dt
+    | Link:
+  dd
+    = @workshop.link
+  dt
+    | Graphic:
+  dd
+    = @workshop.graphic
+  dt
+    | Start date:
+  dd
+    = @workshop.start_date

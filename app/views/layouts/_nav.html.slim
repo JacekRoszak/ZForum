@@ -1,0 +1,13 @@
+nav.navbar.navbar-inverse style="#{ "display:none;" unless current_user}"
+      .container
+        .navbar-header
+          = link_to "Z-FORUM", root_path, class: "btn btn-brand"
+          = link_to  "Czat", chats_path, class: "btn btn-primary nav-button"
+          = link_to  "Posty", posts_path, class: "btn btn-primary nav-button"
+          = link_to  "Ogłoszenia", ads_path, class: "btn btn-primary nav-button" 
+          = link_to  "Wydarzenia", events_path, class: "btn btn-primary nav-button" 
+          = link_to  "Szkolenia", workshops_path, class: "btn btn-primary nav-button"
+          = link_to  "FAQ", faqs_path, class: "btn btn-primary nav-button"
+          = link_to  "Użytkownik", users_path, class: "btn btn-primary nav-button"
+          = link_to  "Wiadomości", messages_path, class: "btn btn-primary nav-button"
+          = link_to  "Wyloguj się", {controller: "pages", action: "logout"}, class: "btn btn-danger nav-button"

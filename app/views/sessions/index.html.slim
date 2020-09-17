@@ -1,0 +1,31 @@
+.page-header
+  = link_to new_session_path, class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-plus
+    |  New Session
+  h1
+    | Listing sessions
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          | Email
+        th
+          | Password
+        th
+        th
+        th
+    tbody
+      - @sessions.each do | session |
+        tr
+          td
+            = session.email
+          td
+            = session.password
+          td
+            = link_to 'Show', session
+          td
+            = link_to 'Edit', edit_session_path(session) 
+          td
+            = link_to 'Destroy', session, method: :delete, data: { confirm: 'Are you sure?' } 

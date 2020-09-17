@@ -1,0 +1,43 @@
+.page-header
+  = link_to new_workshop_path, class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-plus
+    |  New Workshop
+  h1
+    | Listing workshops
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          | User
+        th
+          | Content
+        th
+          | Link
+        th
+          | Graphic
+        th
+          | Start date
+        th
+        th
+        th
+    tbody
+      - @workshops.each do | workshop |
+        tr
+          td
+            = workshop.user_id
+          td
+            = workshop.content
+          td
+            = workshop.link
+          td
+            = workshop.graphic
+          td
+            = workshop.start_date
+          td
+            = link_to 'Show', workshop
+          td
+            = link_to 'Edit', edit_workshop_path(workshop) 
+          td
+            = link_to 'Destroy', workshop, method: :delete, data: { confirm: 'Are you sure?' } 

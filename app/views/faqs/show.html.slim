@@ -1,0 +1,18 @@
+.page-header
+  = link_to faqs_path, class: 'btn btn-default' do 
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  = link_to edit_faq_path(@faq), class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-pencil
+    |  Edit 
+  h1
+    | Show faq
+dl.dl-horizontal
+  dt
+    | Question:
+  dd
+    = @faq.question
+  dt
+    | Answear:
+  dd
+    = @faq.answear

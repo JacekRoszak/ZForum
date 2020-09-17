@@ -13,3 +13,102 @@
  *= require_tree .
  *= require_self
  */
+
+ @media (min-width: 0px) and (max-width: 581px)  { 
+    .navbar, h1{
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+
+
+ }
+
+ @media (min-width: 0px) and (max-width: 1000px)  { 
+    .nav-button{
+        padding: 4px 8px 4px 8px;
+    }
+
+
+}
+@media (min-width: 0px) and (max-width: 1000px)  { 
+    .nav-button{
+        padding: 4px 8px 4px 8px;
+    }
+
+
+}
+
+.table-button{
+    margin: 0 5px !important;
+}
+
+.btn-brand{
+    font-weight: bolder;
+    font-size: 24px !important;
+    color: dimgray;
+}
+
+body{
+    padding: 0;
+}
+
+.btn{
+    margin: 8px;
+}
+
+.btn-chat{
+    height: 12px;
+    width: 12px;
+    line-height: 0.7;
+    margin: 0 0 0 4px;
+    padding: 0;
+}
+
+.p-0{
+    padding: 0 !important;
+}
+
+.chatroom{
+    border: 1px rgb(201, 201, 201) solid;
+    border-top: 0px;
+}
+
+.d-inline-block{
+    display: inline-block;
+}
+
+.w1{
+    width: calc(100% - 34px) !important;
+    padding: 0;
+    float: left;
+}
+.w2{width: 34px;
+    padding: 0;
+    float: left;
+}
+.w3{
+    clear: both;
+}
+
+h1{
+    margin: 0px;
+    padding: 15px;
+}
+
+.button-addon1{
+    margin: 0 0 0 0px !important;
+    border-radius: 0;
+}
+
+.my-input{
+    border-radius: 0;
+}
+
+.vericaltext{
+    width:1px;
+    word-wrap: break-word;
+    font-family: monospace; /* this is just for good looks */
+}
