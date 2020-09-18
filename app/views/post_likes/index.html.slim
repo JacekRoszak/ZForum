@@ -1,0 +1,31 @@
+.page-header
+  = link_to new_post_like_path, class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-plus
+    |  New Post like
+  h1
+    | Listing post_likes
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          | Post
+        th
+          | User
+        th
+        th
+        th
+    tbody
+      - @post_likes.each do | post_like |
+        tr
+          td
+            = post_like.post_id
+          td
+            = post_like.user_id
+          td
+            = link_to 'Show', post_like
+          td
+            = link_to 'Edit', edit_post_like_path(post_like) 
+          td
+            = link_to 'Destroy', post_like, method: :delete, data: { confirm: 'Are you sure?' } 

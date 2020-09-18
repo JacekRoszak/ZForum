@@ -4,13 +4,13 @@
   .col-lg-10.p-0
     = form_for @new_chat do |f|
         .w1
-          = f.text_field :content, class: "form-control my-input", placeholder: "I <3 ZUMBA" 
+          = f.text_field :content, class: "form-control my-input", placeholder: "Nowa wiadomość" 
         .w2
           = f.submit "+", class: "button-addon1 btn btn-primary"
         .w3
   .chatroom.col-lg-10
     - @chats.reverse_each do | chat |
-      . class= "#{ chat.created_at.to_date == Date.today ? "text-body" : "text-muted"}"
+      . class= "#{ chat.created_at.to_date == Date.today ? "text-body" : "text-outdated"}"
         p
           | #{User.find(chat.user_id).name} - 
           | #{chat.content}

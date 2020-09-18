@@ -5,13 +5,26 @@
   h1
     | Korespondenci | Wiadomości
 
-  .col-lg-3 
-    - @contacts.each do |u|
-      = link_to u.name, messages_path(korespondent: u.id)
-      br/
+.col-lg-3 
+  - @contacts.each do |u|
+    = link_to u.name, messages_path(korespondent: u.id), class: "btn btn-primary btn-contacts", style: "#{ " background-color: rgb(230, 115, 115) !important;" if u.id == @buddy.id}"
+    br/
 
-  .col-lg-9
-    - @conversation_messages.each do |message|
-      p
-        | od #{message.sender.name} do #{message.reciptient.name} - #{message.content} - [ #{message.created_at.to_s(:time)} ]
-
+.col-lg-6
+  = form_for @new_message do |f|
+      .w1
+        = f.text_field :content, class: "form-control my-input", placeholder: "Nowa wiadomość do #{@buddy.name}" 
+      .w2
+        - if @buddy
+          = f.hidden_field :reciptient_id, value: @buddy.id
+        = f.hidden_field :sender_id, value: @current_user.id
+        = f.submit "+", class: "button-addon1 btn btn-primary"
+      .w3
+  .bordered
+    - @conversation_messages.reverse_each do |message|
+      .d-line 
+        .d-conv-block style="#{ message.sender == current_user ? "margin-left: auto;"  : "margin-right: auto;" }"
+          .d-in-conv-block style="#{ message.sender == current_user ? "background-color: rgb(38, 137, 230);"  : "background-color: rgb(250, 135, 135);" }"
+            | #{message.content}
+          .d-in-conv-block-time  style="#{  "background-color: white; color:black;"}"
+            |  #{message.created_at.to_s(:time)} 

@@ -1,39 +1,32 @@
 .page-header
-  = link_to new_post_path, class: 'btn btn-primary' do 
+  = link_to new_post_path, class: 'btn btn-primary nav-button' do 
     span.glyphicon.glyphicon-plus
-    |  New Post
+    |  Nowy post
   h1
-    | Listing posts
+    | Lista postów
 
-.table-responsive
-  table.table.table-striped.table-bordered.table-hover
-    thead
-      tr
-        th
-          | User
-        th
-          | Content
-        th
-          | Topic
-        th
-          | Important
-        th
-        th
-        th
-    tbody
-      - @posts.each do | post |
-        tr
-          td
-            = post.user_id
-          td
-            = post.content
-          td
-            = post.topic_id
-          td
-            = post.important
-          td
-            = link_to 'Show', post
-          td
-            = link_to 'Edit', edit_post_path(post) 
-          td
-            = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } 
+- @posts.reverse_each do | post |
+  .post-box
+    .post-head
+      .post-header1
+        .d-inline-block
+          p
+            | Autor: 
+            strong #{ post.user.name}
+          p.post-date
+            | Data dodania: #{Date.today.to_date} 
+        .d-inline-block
+          = link_to "<i class='far fa-edit'></i>".html_safe, edit_post_path(post), class: "post-button btn btn-primary"
+          = link_to "<i class='far fa-trash-alt'></i>".html_safe, post, method: :delete, data: { confirm: 'Are you sure?' }, class: "post-button btn btn-primary" 
+          = link_to "<i class='far fa-thumbs-up'> #{post.post_likes.count}</i>".html_safe, post_likes_path(post_id: post.id), :method => :post, class: "post-button btn btn-primary", style: "width: auto;"
+    .w3
+    .bordered
+      .post-content
+        p 
+          | Temat: 
+          strong #{post.topic}
+        = post.content
+      
+        
+
+

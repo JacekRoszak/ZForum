@@ -18,9 +18,9 @@ class ChatsController < ApplicationController
 
   def create
     @chat = Chat.new(chat_params)
-    @chat.user_id = 1
+    @chat.user_id = current_user.id
     if @chat.save
-      redirect_to chats_path, notice: 'Chat was successfully created.' 
+      redirect_to chats_path
     else
       render :new 
     end
@@ -28,7 +28,7 @@ class ChatsController < ApplicationController
 
   def update
     if @chat.update(chat_params)
-      fredirect_to @chat, notice: 'Chat was successfully updated.' 
+      fredirect_to @chat
     else
       render :edit 
     end
@@ -36,7 +36,7 @@ class ChatsController < ApplicationController
 
   def destroy
     @chat.destroy
-      redirect_to chats_url, notice: 'Chat was successfully destroyed.' 
+      redirect_to chats_url
   end
 
   private

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :post_likes
   resources :messages
   resources :faqs
   resources :workshops

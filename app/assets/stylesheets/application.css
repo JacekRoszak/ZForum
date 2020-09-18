@@ -21,7 +21,10 @@
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
-
+    .page-header{
+        margin: 5px;
+        padding: 5px;
+    }
 
 
  }
@@ -36,9 +39,48 @@
 @media (min-width: 0px) and (max-width: 1000px)  { 
     .nav-button{
         padding: 4px 8px 4px 8px;
+        
     }
+}
+    
+.btn-contacts{
+    width: 100% !important;
+    background-color: rgb(250, 135, 135) !important;
+    border: 1px rgb(250, 135, 135) solid !important;
+    margin: 3px !important;
+}
 
+.d-line{
+    width: 100%;
+}
+.d-in-conv-block{
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-weight: bolder;
+    color: white;
+    margin-right: 3px;
+}
 
+.d-in-conv-block-time{
+    color: slategray;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    vertical-align: bottom;
+
+}
+.d-conv-block{
+    display: block;
+    width: fit-content;
+    margin: 4px;
+}
+
+.bordered{
+    border: 1px solid rgb(210, 210, 210);
+    border-top: 0;
+    border-radius: 0 0 15px 15px;
+    padding: 10px;
 }
 
 .table-button{
@@ -72,12 +114,31 @@ body{
 }
 
 .chatroom{
-    border: 1px rgb(201, 201, 201) solid;
-    border-top: 0px;
+    border: 1px solid rgb(210, 210, 210);
+    border-top: 0;
+    border-radius: 0 0 15px 15px;
+    padding: 10px;
+}
+
+.post-date{
+    font-size: 10px;
+    color: lightslategray;
+    line-height: 1;
+}
+
+p{
+    margin-bottom: 2px;
+}
+
+.text-outdated{
+    color: lightsteelblue !important;
 }
 
 .d-inline-block{
     display: inline-block;
+    vertical-align: top;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .w1{
@@ -85,12 +146,40 @@ body{
     padding: 0;
     float: left;
 }
+.w1 input{
+    border-radius: 15px 0 0 0;
+
+}
+
 .w2{width: 34px;
     padding: 0;
     float: left;
 }
+
+.w2 input{
+    border-radius: 0 15px  0 0;
+}
+
 .w3{
     clear: both;
+}
+.post-head{
+    display: block;
+    width: 100%;
+    height: 44px;
+    border: 1px solid rgb(210, 210, 210) !important;
+    border-radius: 15px 15px 0 0;
+}
+
+.post-button{
+    padding: 2px 4px !important;
+    margin: 4px !important;
+    width: 28px;
+}
+
+.post-header1{
+    padding: 4px 8px;
+    height: 100%;
 }
 
 h1{
@@ -107,8 +196,3 @@ h1{
     border-radius: 0;
 }
 
-.vericaltext{
-    width:1px;
-    word-wrap: break-word;
-    font-family: monospace; /* this is just for good looks */
-}

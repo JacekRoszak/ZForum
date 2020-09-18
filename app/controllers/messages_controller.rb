@@ -6,10 +6,15 @@ class MessagesController < ApplicationController
     @contacts = current_user.contacts
     if params[:korespondent]
       @buddy = User.find(params[:korespondent])    
-      @conversation_messages = (current_user.sent_messages.to_user(@buddy) + current_user.recived_messages.from_user(@buddy)).sort
     else
-      @conversation_messages = []
+      if @contacts.first
+        @buddy = @contacts.first
+      else
+        @buddy = User.new
+      end
     end
+    @conversation_messages = (current_user.sent_messages.to_user(@buddy) + current_user.recived_messages.from_user(@buddy)).sort
+    @new_message = Message.new
   end
 
   def show
@@ -25,7 +30,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     if @message.save
-      redirect_to @message, notice: 'Message was successfully created.' 
+      redirect_to messages_path(korespondent: @message.reciptient_id)
     else
       render :new 
     end

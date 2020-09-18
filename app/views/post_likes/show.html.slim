@@ -1,0 +1,18 @@
+.page-header
+  = link_to post_likes_path, class: 'btn btn-default' do 
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  = link_to edit_post_like_path(@post_like), class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-pencil
+    |  Edit 
+  h1
+    | Show post_like
+dl.dl-horizontal
+  dt
+    | Post:
+  dd
+    = @post_like.post_id
+  dt
+    | User:
+  dd
+    = @post_like.user_id
