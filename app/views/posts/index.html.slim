@@ -16,16 +16,18 @@
           p.post-date
             | Data dodania: #{Date.today.to_date} 
         .d-inline-block
-          = link_to "<i class='far fa-edit'></i>".html_safe, edit_post_path(post), class: "post-button btn btn-primary"
-          = link_to "<i class='far fa-trash-alt'></i>".html_safe, post, method: :delete, data: { confirm: 'Are you sure?' }, class: "post-button btn btn-primary" 
-          = link_to "<i class='far fa-thumbs-up'> #{post.post_likes.count}</i>".html_safe, post_likes_path(post_id: post.id), :method => :post, class: "post-button btn btn-primary", style: "width: auto;"
+          p 
+            | Temat: 
+            strong #{post.topic}
+        .d-inline-block.float-right
+          - if post.user_id == current_user.id
+            = link_to "<i class='far fa-edit'></i>".html_safe, edit_post_path(post), class: "post-button btn btn-primary"
+            = link_to "<i class='far fa-trash-alt'></i>".html_safe, post, method: :delete, data: { confirm: 'Are you sure?' }, class: "post-button btn btn-primary" 
+          = link_to "<i class='far fa-file-alt'></i> Podgląd".html_safe, post, class: "post-button btn btn-primary", style: "width: auto;"
     .w3
-    .bordered
+    .bordered-bottom
       .post-content
-        p 
-          | Temat: 
-          strong #{post.topic}
-        = post.content
+        = post.content.truncate_words(40)+" #{'(...)' if post.content.scan(/\w+/).size > 40 }"
       
         
 

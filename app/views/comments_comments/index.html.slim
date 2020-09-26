@@ -1,0 +1,35 @@
+.page-header
+  = link_to new_comments_comment_path, class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-plus
+    |  New Comments comment
+  h1
+    | Listing comments_comments
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          | Content
+        th
+          | User
+        th
+          | Postcomment
+        th
+        th
+        th
+    tbody
+      - @comments_comments.each do | comments_comment |
+        tr
+          td
+            = comments_comment.content
+          td
+            = comments_comment.user_id
+          td
+            = comments_comment.postcomment_id
+          td
+            = link_to 'Show', comments_comment
+          td
+            = link_to 'Edit', edit_comments_comment_path(comments_comment) 
+          td
+            = link_to 'Destroy', comments_comment, method: :delete, data: { confirm: 'Are you sure?' } 

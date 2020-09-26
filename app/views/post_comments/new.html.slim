@@ -1,0 +1,12 @@
+.page-header
+  = link_to post_comments_path, class: 'btn btn-default' do 
+    span.glyphicon.glyphicon-list-alt
+    |  Powrót 
+  h1
+    | Nowy komentarz do posta
+    br/
+  h4.ml-3
+    | #{@post_comment.post.user.name}: #{@post_comment.post.content} 
+        
+
+= render 'form'

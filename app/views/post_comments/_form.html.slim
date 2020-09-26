@@ -1,0 +1,21 @@
+= form_for(@post_comment, html: { class: "form-horizontal", role: "form" }) do |f|
+  - if @post_comment.errors.any?
+    .alert.alert-danger.alert-dismissable role="alert"
+      button.close type="button" data-dismiss="alert"
+        span aria-hidden="true"
+          | &times;
+        span.sr-only
+          | Close
+      h4= "#{pluralize(@post_comment.errors.count,"error")} prohibited this post_comment from being saved:"
+      ul
+        - @post_comment.errors.full_messages.each do |msg|
+          li= msg
+  .form-group
+    = f.label :content, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_area :content, class: "form-control"
+      = f.hidden_field :user_id, value: current_user.id
+      = f.hidden_field :post_id, value: @post_comment.post_id
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: "btn btn-primary"

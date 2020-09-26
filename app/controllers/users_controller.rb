@@ -10,6 +10,12 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    if params[:action]=="new user after login"
+      @action = params[:action]
+      @email = params[:email]
+      @name = params[:name]
+    end
+
   end
 
   def edit
@@ -18,23 +24,23 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to @user, notice: 'User was successfully created.' 
+      redirect_to @user
     else
-      format.html { render :new }
+      render :new 
     end
   end
 
   def update
     if @user.update(user_params)
-      format.html { redirect_to @user, notice: 'User was successfully updated.' }
+      redirect_to @user
     else
-      format.html { render :edit }
+      render :edit 
     end
   end
 
   def destroy
     @user.destroy
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+    redirect_to users_url
   end
 
   private
@@ -43,6 +49,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :password, :admin, :superadmin, :email)
+      params.require(:user).permit(:name, :admin, :superadmin, :email)
     end
 end

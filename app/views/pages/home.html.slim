@@ -4,15 +4,17 @@
     .page-header
       h1
         | Witamy na stronie Z-Forum
+      h2.text-danger 
+        | #{@res}
     p
       | Proszę się zalogować za pomocą loginu i hasła używanego na stronie zumba.com
 
     = form_tag({:controller => "pages", :action => "login"}, method: :get) do
-      = label_tag :current_user, 'Login:', class: "m-1"
-      = text_field_tag(:current_user)
+      = label_tag :login, 'Login:', class: "m-1"
+      = text_field_tag(:login)
       br/
       = label_tag :password, 'Hasło:', class: "m-1"
-      = text_field_tag(:password)
+      = password_field_tag(:password)
       br/
       = submit_tag 'Zaloguj się', class: "btn btn-primary"
 

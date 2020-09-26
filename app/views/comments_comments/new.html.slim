@@ -1,0 +1,10 @@
+.page-header
+  = link_to comments_comments_path, class: 'btn btn-default' do 
+    span.glyphicon.glyphicon-list-alt
+    |  Powrót 
+  h1
+    | Odpowiedź na komentarz: 
+  h4.ml-3
+    | #{@comments_comment.post_comment.content}
+
+= render 'form'

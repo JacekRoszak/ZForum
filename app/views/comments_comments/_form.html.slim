@@ -1,0 +1,9 @@
+= form_for(@comments_comment, html: { class: "form-horizontal", role: "form" }) do |f|
+  .form-group
+    = f.label "Tekst", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_area :content, class: "form-control"
+      = f.hidden_field :postcomment_id, value: @comments_comment.postcomment_id
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit "Dodaj",class: "btn btn-primary"

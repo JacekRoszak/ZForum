@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_18_085859) do
+ActiveRecord::Schema.define(version: 2020_09_21_110046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,22 @@ ActiveRecord::Schema.define(version: 2020_09_18_085859) do
   create_table "chats", force: :cascade do |t|
     t.integer "user_id"
     t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "comment_id"
+    t.string "content"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "comments_comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id"
+    t.integer "postcomment_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -55,11 +71,19 @@ ActiveRecord::Schema.define(version: 2020_09_18_085859) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "post_comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id"
+    t.integer "post_id"
+  end
+
   create_table "post_likes", force: :cascade do |t|
-    t.string "post_id"
-    t.string "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "post_id"
+    t.index ["post_id"], name: "index_post_likes_on_post_id"
+    t.index ["user_id"], name: "index_post_likes_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|

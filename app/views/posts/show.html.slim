@@ -1,26 +1,41 @@
-.page-header
-  = link_to posts_path, class: 'btn btn-default' do 
-    span.glyphicon.glyphicon-list-alt
-    |  Back 
-  = link_to edit_post_path(@post), class: 'btn btn-primary' do 
-    span.glyphicon.glyphicon-pencil
-    |  Edit 
-  h1
-    | Show post
-dl.dl-horizontal
-  dt
-    | User:
-  dd
-    = @post.user_id
-  dt
-    | Content:
-  dd
-    = @post.content
-  dt
-    | Topic:
-  dd
-    = @post.topic
-  dt
-    | Important:
-  dd
-    = @post.important
+.post-head
+  .d-inline-block  
+    p
+      | Autor: 
+      strong #{@post.user.name}
+    p
+      | Temat: 
+      strong #{@post.topic}
+  .d-inline-block
+    = link_to "<i class='far fa-list-alt'></i>".html_safe, posts_path, class: 'btn post-button btn-primary'
+    - if @post.user_id == current_user.id
+      = link_to "<i class='far fa-edit'></i>".html_safe, edit_post_path(@post), class: 'btn post-button btn-primary'
+    - if @post.liked_by?(current_user)
+      - postlike = PostLike.find_by(user_id: current_user.id, post_id: @post.id)
+      = link_to "<i class='far fa-thumbs-up'> #{@post.post_likes.count}</i>".html_safe, post_like_path(postlike_id: postlike.id, post_id: @post.id), :method => :delete, class: "post-button btn btn-primary", style: "width: auto;background-color:green;"
+    - else
+      = link_to "<i class='far fa-thumbs-up'> #{@post.post_likes.count}</i>".html_safe, post_likes_path(post_id: @post.id), :method => :post, class: "post-button btn btn-primary", style: "width: auto;"
+.bordered-bottom
+  = @post.content
+  br/
+  br/
+  = form_for @post_comment do |f|
+    .w1
+      = f.text_field :content, class: "form-control my-input", placeholder: "Nowy komentarz" 
+      = f.hidden_field :parent_id_id, value: nil
+      = f.hidden_field :user_id, value: current_user.id
+      = f.hidden_field :post_id, value: @post.id
+    .w2
+      = f.submit "+", class: "button-addon1 btn btn-primary"
+    .w3
+  .bordered-bottom
+    - @post.post_comments.each do |comment|
+        p
+          | ~ #{comment.user.name}: #{comment.content}
+          = link_to "<i class='far fa-comment'></i>".html_safe, new_comments_comment_path(postcomment_id: comment.id), class: "btn-comment"
+          - comment.cc.each do |child|
+            .comment-div
+              p
+                | ~> #{child.user.name}: #{child.content}
+
+          

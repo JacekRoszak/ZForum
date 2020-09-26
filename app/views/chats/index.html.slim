@@ -10,9 +10,10 @@
         .w3
   .chatroom.col-lg-10
     - @chats.reverse_each do | chat |
-      . class= "#{ chat.created_at.to_date == Date.today ? "text-body" : "text-outdated"}"
-        p
-          | #{User.find(chat.user_id).name} - 
-          | #{chat.content}
-          - if chat.user_id == current_user.id
-            = link_to 'x', chat, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-chat"
+      - if chat.user
+        . class= "#{ chat.created_at.to_date == Date.today ? "text-body" : "text-outdated"}"
+          p
+            | #{chat.user.name} - 
+            | #{chat.content}
+            - if chat.user_id == current_user.id
+              = link_to 'x', chat, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-chat"

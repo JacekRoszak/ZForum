@@ -1,11 +1,12 @@
 .page-header
-  = link_to new_message_path, class: 'btn btn-primary' do 
-    span.glyphicon.glyphicon-plus
-    |  New Message
+  / = link_to new_message_path, class: 'btn btn-primary' do 
+  /   span.glyphicon.glyphicon-plus
+  /   |  New Message
   h1
     | Korespondenci | Wiadomości
 
-.col-lg-3 
+.col-lg-3
+  
   - @contacts.each do |u|
     = link_to u.name, messages_path(korespondent: u.id), class: "btn btn-primary btn-contacts", style: "#{ " background-color: rgb(230, 115, 115) !important;" if u.id == @buddy.id}"
     br/
@@ -20,7 +21,7 @@
         = f.hidden_field :sender_id, value: @current_user.id
         = f.submit "+", class: "button-addon1 btn btn-primary"
       .w3
-  .bordered
+  .bordered-bottom
     - @conversation_messages.reverse_each do |message|
       .d-line 
         .d-conv-block style="#{ message.sender == current_user ? "margin-left: auto;"  : "margin-right: auto;" }"

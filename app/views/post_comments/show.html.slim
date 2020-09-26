@@ -1,0 +1,26 @@
+.page-header
+  = link_to post_comments_path, class: 'btn btn-default' do 
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  = link_to edit_post_comment_path(@post_comment), class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-pencil
+    |  Edit 
+  h1
+    | Show post_comment
+dl.dl-horizontal
+  dt
+    | Content:
+  dd
+    = @post_comment.content
+  dt
+    | Postcomment:
+  dd
+    = @post_comment.postcomment_id
+  dt
+    | User:
+  dd
+    = @post_comment.user_id
+  dt
+    | Post:
+  dd
+    = @post_comment.post_id
