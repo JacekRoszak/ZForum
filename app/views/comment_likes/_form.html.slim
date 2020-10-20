@@ -1,0 +1,23 @@
+= form_for(@comment_like, html: { class: "form-horizontal", role: "form" }) do |f|
+  - if @comment_like.errors.any?
+    .alert.alert-danger.alert-dismissable role="alert"
+      button.close type="button" data-dismiss="alert"
+        span aria-hidden="true"
+          | &times;
+        span.sr-only
+          | Close
+      h4= "#{pluralize(@comment_like.errors.count,"error")} prohibited this comment_like from being saved:"
+      ul
+        - @comment_like.errors.full_messages.each do |msg|
+          li= msg
+  .form-group
+    = f.label :user_id, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.number_field :user_id, class: "form-control"
+  .form-group
+    = f.label :comment_id, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.number_field :comment_id, class: "form-control"
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: "btn btn-primary"

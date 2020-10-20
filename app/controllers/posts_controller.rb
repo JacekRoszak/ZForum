@@ -2,7 +2,21 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   
   def index
-    @posts = Post.all
+    if params[:filter_topic] 
+      if params[:filter_author]
+        authors = User.where("name like ?", "%#{params[:filter_author]}%").pluck(:id)
+        @posts = Post.where("topic like ?", "%#{params[:filter_topic]}%").where(user_id: authors)
+      else
+        @posts = Post.where("topic like ?", "%#{params[:filter_topic]}%")
+      end
+    else
+      if params[:filter_author]
+        authors = User.where("name like ?", "%#{params[:filter_author]}%").pluck(:id)
+        @posts = Post.where(user_id: authors)
+      else
+        @posts = Post.all
+      end
+    end
   end
 
   def show
@@ -18,7 +32,8 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-
+    @post.important = false
+    @post.user_id = current_user.id
     if @post.save
       redirect_to @post, notice: 'Post was successfully created.' 
     else
@@ -45,6 +60,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:user_id, :content, :topic, :important)
+      params.require(:post).permit(:user_id, :content, :topic, :important, :filter_author, :filter_topic)
     end
 end

@@ -1,22 +1,29 @@
 .post-head
   .d-inline-block  
     p
-      | Autor: 
-      strong #{@post.user.name}
+      .nmnp.text-body.d-inline-block.margin-correction
+        | Autor: 
+      .nmnp.text-primary.d-inline-block
+        strong #{@post.user.name}
     p
-      | Temat: 
-      strong #{@post.topic}
-  .d-inline-block
-    = link_to "<i class='far fa-list-alt'></i>".html_safe, posts_path, class: 'btn post-button btn-primary'
+      .nmnp.text-body.d-inline-block
+        | Temat: 
+      .nmnp.text-primary.d-inline-block
+        strong #{@post.topic}
+  .d-inline-block.p-4
+    = link_to "<i class='far fa-list-alt'></i>".html_safe, posts_path, class: 'post-button-sm'
     - if @post.user_id == current_user.id
-      = link_to "<i class='far fa-edit'></i>".html_safe, edit_post_path(@post), class: 'btn post-button btn-primary'
+      = link_to "<i class='far fa-edit'></i>".html_safe, edit_post_path(@post), class: 'post-button-sm'
+      = link_to "<i class='far fa-trash-alt'></i>".html_safe, @post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'post-button-sm' 
     - if @post.liked_by?(current_user)
       - postlike = PostLike.find_by(user_id: current_user.id, post_id: @post.id)
-      = link_to "<i class='far fa-thumbs-up'> #{@post.post_likes.count}</i>".html_safe, post_like_path(postlike_id: postlike.id, post_id: @post.id), :method => :delete, class: "post-button btn btn-primary", style: "width: auto;background-color:green;"
+      = link_to "<i class='far fa-thumbs-up' style='color:green;'> #{@post.post_likes.count}</i>".html_safe, post_like_path(postlike_id: postlike.id,
+       post_id: @post.id), :method => :delete, class: "post-button-sm", style: "width: auto;"
     - else
-      = link_to "<i class='far fa-thumbs-up'> #{@post.post_likes.count}</i>".html_safe, post_likes_path(post_id: @post.id), :method => :post, class: "post-button btn btn-primary", style: "width: auto;"
-.bordered-bottom
-  = @post.content
+      = link_to "<i class='far fa-thumbs-up' style='color:gray;'> #{@post.post_likes.count}</i>".html_safe, post_likes_path(post_id: @post.id),
+       :method => :post, class: "post-button-sm", style: "width: auto;"
+.bordered-bottom.text-primary
+  = simple_format(@post.content)
   br/
   br/
   = form_for @post_comment do |f|
@@ -31,11 +38,29 @@
   .bordered-bottom
     - @post.post_comments.each do |comment|
         p
-          | ~ #{comment.user.name}: #{comment.content}
+          .nmnp.text-primary.d-inline-block
+            | ~ 
+          .nmnp.text-body.d-inline-block
+            | #{comment.user.name}
+          .nmnp.text-primary.d-inline-block
+            | : #{comment.content}
           = link_to "<i class='far fa-comment'></i>".html_safe, new_comments_comment_path(postcomment_id: comment.id), class: "btn-comment"
+          - if comment.liked_by?(current_user)
+            - commentlike = CommentLike.find_by(user_id: current_user.id, post_comment_id: comment.id)
+            = link_to "<i class='far fa-thumbs-up' style='color:green;'> #{comment.comment_likes.count}</i>".html_safe,
+             comment_like_path(post_id: @post.id, user_id: current_user.id, commentlike_id: commentlike.id),
+              :method => :delete, class: "comment-button", style: "width: auto;"
+          - else
+            = link_to "<i class='far fa-thumbs-up' style='color:gray;'> #{comment.comment_likes.count}</i>".html_safe,
+             comment_likes_path(post_id: @post.id, user_id: current_user.id, comment_id: comment.id),
+              :method => :post, class: "comment-button", style: "width: auto;"
           - comment.cc.each do |child|
-            .comment-div
-              p
-                | ~> #{child.user.name}: #{child.content}
+            .ccindent
+              .nmnp.text-primary.d-inline-block.comment-div
+                | ~ 
+              .nmnp.text-body.d-inline-block.comment-div
+                | #{child.user.name}
+              .nmnp.text-primary.d-inline-block.comment-div
+                | : #{child.content}
 
           

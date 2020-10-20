@@ -1,35 +1,18 @@
-.page-header
-  = link_to new_ad_path, class: 'btn btn-primary' do 
-    span.glyphicon.glyphicon-plus
-    |  New Ad
-  h1
-    | Listing ads
-
-.table-responsive
-  table.table.table-striped.table-bordered.table-hover
-    thead
-      tr
-        th
-          | User
-        th
-          | Content
-        th
-          | End
-        th
-        th
-        th
-    tbody
-      - @ads.each do | ad |
-        tr
-          td
-            = ad.user_id
-          td
-            = ad.content
-          td
-            = ad.end
-          td
-            = link_to 'Show', ad
-          td
-            = link_to 'Edit', edit_ad_path(ad) 
-          td
-            = link_to 'Destroy', ad, method: :delete, data: { confirm: 'Are you sure?' } 
+.container
+  .page-header
+    = link_to new_ad_path, class: 'btn btn-primary' do 
+      span.glyphicon.glyphicon-plus
+      |  Nowe ogłoszenie
+    h1
+      | Ogłoszenia
+.p3
+    - @ads.each do | ad |
+      = link_to ad do
+        .ad-div
+          p 
+            strong #{User.find(ad.user_id).name}
+          p #{ad.content}
+          .text-down 
+            | od #{ad.created_at.to_date} do #{ad.end}
+            / = link_to 'Edit', edit_ad_path(ad) 
+            / = link_to 'Destroy', ad, method: :delete, data: { confirm: 'Are you sure?' } 

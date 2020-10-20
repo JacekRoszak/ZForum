@@ -1,34 +1,49 @@
-.page-header
-  = link_to new_post_path, class: 'btn btn-primary nav-button' do 
-    span.glyphicon.glyphicon-plus
-    |  Nowy post
-  h1
-    | Lista postów
+.container
+  .page-header
+    = link_to new_post_path, class: 'btn btn-primary nav-button shadowed' do 
+      span.glyphicon.glyphicon-plus
+      |  Nowy post
+    h1
+      | Lista postów
+    = form_tag({:controller => "posts", :action => "index"}, method: :get) do
+      .d-inline-block.my-auto
+        = label_tag :filter_author, 'Autor:', class: ""
+      .d-inline-block.F-50.my-auto
+        = text_field_tag :filter_author, "", class: "form-control filter"
+      .d-inline-block.my-auto
+        = label_tag :filter_topic, 'Temat:', class: ""
+      .d-inline-block.F-50.my-auto
+        = text_field_tag :filter_topic, "", class: "form-control filter"
+      .d-inline-block.my-auto
+        = submit_tag 'Filtr', class: "btn btn-primary shadowed"
 
-- @posts.reverse_each do | post |
-  .post-box
-    .post-head
-      .post-header1
-        .d-inline-block
-          p
-            | Autor: 
-            strong #{ post.user.name}
-          p.post-date
-            | Data dodania: #{Date.today.to_date} 
-        .d-inline-block
-          p 
-            | Temat: 
-            strong #{post.topic}
-        .d-inline-block.float-right
-          - if post.user_id == current_user.id
-            = link_to "<i class='far fa-edit'></i>".html_safe, edit_post_path(post), class: "post-button btn btn-primary"
-            = link_to "<i class='far fa-trash-alt'></i>".html_safe, post, method: :delete, data: { confirm: 'Are you sure?' }, class: "post-button btn btn-primary" 
-          = link_to "<i class='far fa-file-alt'></i> Podgląd".html_safe, post, class: "post-button btn btn-primary", style: "width: auto;"
-    .w3
-    .bordered-bottom
-      .post-content
-        = post.content.truncate_words(40)+" #{'(...)' if post.content.scan(/\w+/).size > 40 }"
-      
+
+
+  - @posts.reverse_each do | post |
+    - if post.user
+      = link_to post do
+        .post-box
+          .post-head
+            .post-header1
+              .d-inline-block
+                p
+                  .nmnp.text-body.d-inline-block.margin-correction
+                    | Autor: 
+                  .nmnp.text-primary.d-inline-block
+                    strong #{post.user.name}
+                p.post-date
+                  | Data dodania: #{Date.today.to_date} 
+              .d-inline-block
+                p
+                  .nmnp.text-body.d-inline-block
+                    | Temat: 
+                  .nmnp.text-primary.d-inline-block
+                    strong #{post.topic}
+          .w3
+          .bordered-bottom
+            .post-content
+              = post.content.truncate_words(40)+" #{'(...)' if post.content.scan(/\w+/).size > 40 }"
         
+          
 
 

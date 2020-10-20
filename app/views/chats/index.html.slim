@@ -1,19 +1,20 @@
-.
+.container
   h1
     | Czat
-  .col-lg-10.p-0
-    = form_for @new_chat do |f|
-        .w1
-          = f.text_field :content, class: "form-control my-input", placeholder: "Nowa wiadomość" 
-        .w2
-          = f.submit "+", class: "button-addon1 btn btn-primary"
-        .w3
-  .chatroom.col-lg-10
-    - @chats.reverse_each do | chat |
-      - if chat.user
-        . class= "#{ chat.created_at.to_date == Date.today ? "text-body" : "text-outdated"}"
-          p
-            | #{chat.user.name} - 
-            | #{chat.content}
-            - if chat.user_id == current_user.id
-              = link_to 'x', chat, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-chat"
+  .shadowed.rounded.chatroombox.col-lg-10.p-0
+    .p-0
+      = form_for @new_chat do |f|
+          .w1
+            = f.text_field :content, class: "form-control my-input", placeholder: "Nowa wiadomość" 
+          .w2
+            = f.submit "+", class: "button-addon1 btn btn-primary"
+          .w3
+    .chatroom
+      - @chats.reverse_each do | chat |
+        - if chat.user
+          . class= "#{ chat.created_at.to_date == Date.today ? "text-body" : "text-outdated"}"
+            p
+              | #{chat.user.name} - 
+              | #{chat.content}
+              - if chat.user_id == current_user.id
+                = link_to 'x', chat, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-chat"

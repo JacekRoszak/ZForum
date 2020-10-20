@@ -1,0 +1,12 @@
+.page-header
+  = link_to comment_comment_likes_path, class: 'btn btn-default' do
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  = link_to @comment_comment_like, class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-info-sign
+    |  Show 
+  h1
+    | Editing 
+    | comment_comment_like
+
+= render 'form'

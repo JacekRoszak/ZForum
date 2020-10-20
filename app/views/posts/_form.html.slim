@@ -12,13 +12,13 @@
           li= msg
       = f.hidden_field :user_id, value: current_user.id
   .form-group
-    = f.label :content, class: "col-sm-2 control-label"
-    .col-sm-10
-      = f.text_area :content, class: "form-control"
-  .form-group
-    = f.label :topic, class: "col-sm-2 control-label"
+    = f.label "Temat:", class: "col-sm-2 control-label"
     .col-sm-10
       = f.text_area :topic, class: "form-control"
   .form-group
+    = f.label "Treść:", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_area :content, class: "form-control"
+  .form-group
     .col-sm-offset-2.col-sm-10
-      = f.submit "Dodaj post", class: "btn btn-primary"
+      = f.submit "OK!", class: "btn btn-primary"

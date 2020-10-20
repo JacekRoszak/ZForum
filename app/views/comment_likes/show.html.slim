@@ -1,0 +1,18 @@
+.page-header
+  = link_to comment_likes_path, class: 'btn btn-default' do 
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  = link_to edit_comment_like_path(@comment_like), class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-pencil
+    |  Edit 
+  h1
+    | Show comment_like
+dl.dl-horizontal
+  dt
+    | User:
+  dd
+    = @comment_like.user_id
+  dt
+    | Comment:
+  dd
+    = @comment_like.comment_id

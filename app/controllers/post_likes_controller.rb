@@ -13,13 +13,11 @@ class PostLikesController < ApplicationController
   end
 
   def create
-    unless Post.find(params[:post_id]).likers.include? current_user
-      @post_like = PostLike.new(:post_id => params[:post_id])
-      @post_like.user_id = current_user.id
-      @post_like.save
-      post = Post.find(params[:post_id])
-      redirect_to post
-    end
+    @post_like = PostLike.new(:post_id => params[:post_id])
+    @post_like.user_id = current_user.id
+    @post_like.save
+    post = Post.find(params[:post_id])
+    redirect_to post
   end
 
   def update

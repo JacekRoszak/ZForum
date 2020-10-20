@@ -1,0 +1,31 @@
+.page-header
+  = link_to new_comment_comment_like_path, class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-plus
+    |  New Comment comment like
+  h1
+    | Listing comment_comment_likes
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          | User
+        th
+          | Comment
+        th
+        th
+        th
+    tbody
+      - @comment_comment_likes.each do | comment_comment_like |
+        tr
+          td
+            = comment_comment_like.user_id
+          td
+            = comment_comment_like.comment_id
+          td
+            = link_to 'Show', comment_comment_like
+          td
+            = link_to 'Edit', edit_comment_comment_like_path(comment_comment_like) 
+          td
+            = link_to 'Destroy', comment_comment_like, method: :delete, data: { confirm: 'Are you sure?' } 
